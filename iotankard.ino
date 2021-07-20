@@ -1,3 +1,10 @@
+// Motor //
+int IN1 = 12;
+int motorSpeed = 10;
+int maxVibrateSpeed = 255;
+int minVibrateSpeed = 40;
+
+// Buttons //
 int buttonDelay = 100;
 int buttonPressed = 0;
 
@@ -13,10 +20,16 @@ int pinkey_Btn;
 
 void setup() {
   Serial.begin(9600);
+
+  /* Buttons */
   pinMode(indexFinger_ButtonPin, INPUT);
   pinMode(middleFinger_ButtonPin, INPUT);
   pinMode(ringFinger_ButtonPin, INPUT);
   pinMode(pinkey_ButtonPin, INPUT);
+
+  /* Motor */
+  pinMode(IN1, OUTPUT);
+
   Serial.println("SETUP DONE");
   delay(10);
 }
@@ -47,14 +60,52 @@ void loop() {
   } else if (middleFinger_Btn == HIGH && buttonPressed == 0) {
     Serial.println("W pressed ");
     delay(buttonDelay);
+    Pulse(10);
     buttonPressed = 1;
   } else if (ringFinger_Btn == HIGH && buttonPressed == 0) {
     Serial.println("E pressed ");
     delay(buttonDelay);
+    Climb(5);
     buttonPressed = 1;
   } else if (pinkey_Btn == HIGH && buttonPressed == 0) {
     Serial.println("R pressed ");
+    StopMotor()
     delay(buttonDelay);
     buttonPressed = 1;
   }
+}
+
+void Pulse(int pulseCount) {
+  for (int i = 0; i < pulseCount; i++ ) {
+    analogWrite(IN1, maxVibrateSpeed);
+    delay(100);
+    analogWrite(IIN1N2, 0);
+    delay(100);
+    Serial.println("Pulse");
+  }
+}
+
+void Climb(int climbCount)
+{
+  for (int i = 0; i < climbCount; i++ ) {
+    for (int i = minVibrateSpeed; i < maxVibrateSpeed; i = i + 5) {
+      analogWrite(IN1, i);
+      Serial.println(i);
+      delay(20);
+    }
+    for (int i = maxVibrateSpeed; i > minVibrateSpeed; i = i - 5) {
+      analogWrite(IN1, i);
+      Serial.println(i);
+      delay(20);
+    }
+    Serial.println("Climbed");
+    Serial.println();
+    analogWrite(IN1, 0);
+  }
+}
+
+void StopMotor()
+{
+  digitalWrite(IN2, LOW);
+  Serial.println("Stop Vibration");
 }

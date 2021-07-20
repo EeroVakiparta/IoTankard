@@ -15,3 +15,26 @@ Curious IoT test project.
 | IF            | A6                |                        |
 
 3 free digital and 5 analog pins
+
+
+# TODO
+
+- Should the motor drive 2 directions
+- Should I add capasitor for motor
+- Come up with the connection to laptop
+
+## Buttons
+
+MX cherry copies. The key caps are yet to be decided on.
+
+## Motor
+
+6V basic motor was used. Went for low durability solution and soldered a big chunk at the tip of axis.
+
+## Casing
+
+1. "The Wand"
+
+2. "The Remote"
+
+3. "The Tankard
