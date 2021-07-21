@@ -22,6 +22,8 @@ Curious IoT test project.
 - Should the motor drive 2 directions
 - Should I add capasitor for motor
 - Come up with the connection to laptop
+- Try accelerometer SPI communication with 3 wires instead of 4
+- Fix double tap provoking a tap after
 
 ## Buttons
 
