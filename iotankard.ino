@@ -1,4 +1,8 @@
 #include <SparkFun_ADXL345.h> // accelerometer
+#include <SoftwareSerial.h>  // Bluetooth
+
+// Bluetooth //
+SoftwareSerial bt(2,3); // RX/TS pins as parameters
 
 // Accelerometer //
 ADXL345 adxl = ADXL345(10);           // SPI com ADXL345(CS_PIN);
@@ -25,7 +29,7 @@ int pinkey_Btn;
 
 void setup() {
   Serial.begin(9600);
-
+  bt.begin(9600);
   /* Accelerometer */
   adxl.powerOn();
   adxl.setRangeSetting(16);           // range in G (2,4,8,16) Drawback with higher Gs is lower sensitivity
@@ -64,11 +68,13 @@ void setup() {
   pinMode(IN1, OUTPUT);
 
   Serial.println("SETUP DONE");
+  bt.println("SERUP DONE");
   delay(10);
 }
 
 void loop() {
 
+  bt.println("BT ping");
   // Accelerometer
   int x, y, z;
   adxl.readAccel(&x, &y, &z);
@@ -90,20 +96,24 @@ void loop() {
 
   if (indexFinger_Btn == HIGH && buttonPressed == 0 ) {
     Serial.println("Q pressed ");
+    bt.println("Q");
     delay(buttonDelay);
     buttonPressed = 1;
   } else if (middleFinger_Btn == HIGH && buttonPressed == 0) {
     Serial.println("W pressed ");
+    bt.println("W");
     delay(buttonDelay);
     Pulse(10);
     buttonPressed = 1;
   } else if (ringFinger_Btn == HIGH && buttonPressed == 0) {
     Serial.println("E pressed ");
+    bt.println("E");
     delay(buttonDelay);
     Climb(5);
     buttonPressed = 1;
   } else if (pinkey_Btn == HIGH && buttonPressed == 0) {
     Serial.println("R pressed ");
+    bt.println("R");
     StopMotor();
     delay(buttonDelay);
     buttonPressed = 1;
