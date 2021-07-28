@@ -11,7 +11,7 @@
 #define SCREEN_HEIGHT 32 
 
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
-#define SCREEN_ADDRESS 0x3C // 0x3D for 128x64, 0x3C for 128x32
+#define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 // Bluetooth //
@@ -40,9 +40,18 @@ int middleFinger_Btn;
 int ringFinger_Btn;
 int pinkey_Btn;
 
+// IR sensor //
+int IRsensor = A2;
+
+// Status variables //
+bool drinkLoaded = false;
+bool sipTaken = false;
+int sipcount = 0;
+
 void setup() {
   Serial.begin(9600);
   bt.begin(9600);
+
 
   /* Screen */
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -94,6 +103,9 @@ void setup() {
   pinMode(IN1, OUTPUT);
   pinMode(A1, OUTPUT);
 
+  /* IR sensor */
+  pinMode (IRsensor, INPUT);
+
   Serial.println("SETUP DONE");
   bt.println("BT SETUP DONE");
   drawtext("IoTankard");
@@ -101,6 +113,17 @@ void setup() {
 }
 
 void loop() {
+  
+  if(digitalRead (IRsensor) == 0){
+    //Serial.println("Beer loaded."); 
+    drinkLoaded = true;
+  }else{
+    //Serial.println("Load beer now.");
+    drinkLoaded = false;
+  }
+  
+  buttonPressed = 0;
+  
   // bt.println("BT ping"); // BT debugging
   
   // Accelerometer
@@ -114,9 +137,21 @@ void loop() {
   delay(500);
   ADXL_ISR();
 
+  if(sipTaken){
+    if(x < 10 && y < 10 && x > -10 && y > -10){
+      Serial.println("Reseting sip.");
+      sipTaken = false;
+    }
+  }
 
-  buttonPressed = 0;
-
+  if(drinkLoaded && (x > 20 || y > 20 || x < -20 || y < -20) && !sipTaken){
+    Serial.println("Sip taken ! ");
+    sipcount++;
+    Serial.print("Sips total: ");
+    Serial.println(sipcount);
+    sipTaken = true;
+  }
+ 
   indexFinger_Btn = readButton(indexFinger_ButtonPin);
   middleFinger_Btn = readButton(middleFinger_ButtonPin);
   ringFinger_Btn = readButton(ringFinger_ButtonPin);
