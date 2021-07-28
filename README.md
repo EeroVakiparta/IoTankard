@@ -53,7 +53,7 @@ The Ebin game remote which this was originally supposed to be went through few b
 
 Trying to see if everything fits inside | Modeled all parts | Closest to final product before first print
 --- | --- | ---
-![measuring how to fit everything](pictures/howtofit.png)|![models of part needing to fit inside](pictures/bottlepieces.png)|![first good version](pictures/afterlotofiterations.png)
+![measuring how to fit everything](pictures/howtofit.jpg)|![models of part needing to fit inside](pictures/bottlepieces.jpg)|![first good version](pictures/afterlotofiterations.jpg)
 NOTE: next version will be done with fusion 360. At the moment of first desing I did not own any licenses to proper 3d design software.
 
 # Bluetooth
