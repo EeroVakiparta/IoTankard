@@ -54,6 +54,8 @@ The Ebin game remote which this was originally supposed to be went through few b
 Trying to see if everything fits inside | Modeled all parts | Closest to final product before first print
 --- | --- | ---
 ![measuring how to fit everything](pictures/howtofit.jpg)|![models of part needing to fit inside](pictures/bottlepieces.jpg)|![first good version](pictures/afterlotofiterations.jpg)
+
+
 NOTE: next version will be done with fusion 360. At the moment of first desing I did not own any licenses to proper 3d design software.
 
 # Bluetooth
@@ -75,14 +77,21 @@ Converting the serial to key presses I used simple powershell script ( readCOM.p
 ```
 
 
-| KEY        | TRIGGER              | Notes                  |
-| ------------- |:-------------:    | ----------------------:|
-| Q              | Button      |  Index finger    |
-| W             | Button            |   middle finger              |
-| E         | Button            |   ring ifnger             |
-| R      | Button   |        pinkey finger             |
-|  x  | IR sensor         |    x     |
-|    x        | x                |           x             |
+| KEY | TRIGGER   | NOTES                                                   | Ebin boardgame action |   |
+|-----|-----------|---------------------------------------------------------|-----------------------|---|
+| Q   | Button    | Index finger                                            | Travel button         |   |
+| W   | Button    | Middle finger                                           | Dice                  |   |
+| E   | Button    | Ring finger                                             | Group Dice            |   |
+| R   | Button    | Pinkey finger                                           | Biome Event           |   |
+| ?   | IR Sensor | Beer can removed                                        |                       |   |
+| ?   | IR Sensor | Beer can inserted                                       |                       |   |
+| ?   | Sensor    | Swig taken (lenght adjustable)                          |                       |   |
+| ?   | Sensor    | Tankard falling from table                              |                       |   |
+| ?   | Sensor    | Tankard has not been in hand for 5 seconds (inactivity) |                       |   |
+| ?   | Sensor    | Tankard in hand                                         |                       |   |
+| ?   | Sensor    | Tankard tapped on table                                 |                       |   |
+| ?   | Sensor    | Tankard tapped to table twice                           |                       |   |
+|     | Sensor    | Beer can upside down (Bottoms up)                       |                       |   |
 
 
 Trying to explain what I'm doing to team | Some of the prototyping hardware
