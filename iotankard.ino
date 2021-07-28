@@ -2,13 +2,13 @@
 #include <SoftwareSerial.h>  // Bluetooth
 
 // Bluetooth //
-SoftwareSerial bt(2,3); // RX/TS pins as parameters
+SoftwareSerial bt(2,3); // RX/TS pins as parameters remember to cross wire these
 
 // Accelerometer //
 ADXL345 adxl = ADXL345(10);           // SPI com ADXL345(CS_PIN);
 
 // Motor //
-int IN1 = 12;
+int IN1 = 9;
 int motorSpeed = 10;
 int maxVibrateSpeed = 255;
 int minVibrateSpeed = 40;
@@ -66,15 +66,16 @@ void setup() {
 
   /* Motor */
   pinMode(IN1, OUTPUT);
+  pinMode(A1, OUTPUT);
 
   Serial.println("SETUP DONE");
-  bt.println("SERUP DONE");
+  bt.println("BT SETUP DONE");
   delay(10);
 }
 
 void loop() {
-
-  bt.println("BT ping");
+  // bt.println("BT ping"); // BT debugging
+  
   // Accelerometer
   int x, y, z;
   adxl.readAccel(&x, &y, &z);
@@ -97,6 +98,7 @@ void loop() {
   if (indexFinger_Btn == HIGH && buttonPressed == 0 ) {
     Serial.println("Q pressed ");
     bt.println("Q");
+    buttonFeedback(1);
     delay(buttonDelay);
     buttonPressed = 1;
   } else if (middleFinger_Btn == HIGH && buttonPressed == 0) {
@@ -166,6 +168,13 @@ void StopMotor()
 {
   digitalWrite(IN1, LOW);
   Serial.println("Stop Vibration");
+}
+
+void buttonFeedback(int pulseCount) {  
+    analogWrite(IN1, maxVibrateSpeed);
+    delay(15);
+    analogWrite(IN1, 0);
+    Serial.println("Button Feedback");
 }
 
 // --- Accelerometer functions --- //
