@@ -16,6 +16,9 @@ Curious IoT test project.
 
 3 free digital and 5 analog pins
 
+![Alt text](pictures\IDEA.jpg "Title")
+
+![Screenshot](pictures\IDEA.jpg)
 
 # TODO
 
